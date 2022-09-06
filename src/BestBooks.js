@@ -2,11 +2,11 @@ import React from "react";
 import axios from "axios";
 // import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import UpdatForm from "./UpdatForm";
+import AddBookForm from "./AddBookForm";
 const URL = process.env.REACT_APP_URL;
 
 class BestBooks extends React.Component {
@@ -35,9 +35,6 @@ class BestBooks extends React.Component {
 
   addBook = (e) => {
     e.preventDefault();
-    // const title= e.target.title.value
-    // const description = e.target.description.value
-    // const select = e.target.select.value
     const obj = {
       title: e.target.title.value,
       description: e.target.description.value,
@@ -102,56 +99,18 @@ class BestBooks extends React.Component {
     });
   };
 
-  /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
   render() {
-    /* TODO: render all the books in a Carousel */
 
     return (
       <div style={{ backgroundColor: "gray" }}>
-        <Form onSubmit={this.addBook} style={{ textAlign: "center" }}>
-          <Form.Group className="mb-3">
-            <Form.Label style={{ fontSize: "20px" }}>Book Title</Form.Label>
-            <Form.Control
-              placeholder="Book Title"
-              name="title"
-              style={{ textAlign: "center", margin: "auto", width: "auto" }}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label style={{ fontSize: "20px" }}>
-              Book Description
-            </Form.Label>
-            <Form.Control
-              placeholder="Book Description"
-              name="description"
-              style={{ textAlign: "center", margin: "auto", width: "auto" }}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label style={{ fontSize: "20px" }}>Status</Form.Label>
-            <Form.Select
-              id="status"
-              style={{ textAlign: "center", margin: "auto", width: "auto" }}
-            >
-              <option value="avaliable">Avaliable</option>
-              <option value="not avaliable">Not Avaliable</option>
-              <option value="favorate">Favorate</option>
-            </Form.Select>
-          </Form.Group>
-          <Button
-            type="submit"
-            style={{ fontSize: "20px", marginBottom: "30px" }}
-          >
-            Add new book
-          </Button>
-        </Form>
-        {/* {this.state.books.length ? (
-          <p>Book Carousel coming soon</p>
-        ) : (
-          <h3>No Books Found :(</h3>
-        )} */}
+        <AddBookForm addBook={this.addBook}/>
+        <UpdatForm
+          show={this.state.showFlag}
+          handleClose={this.handleClose}
+          updateHandler={this.updateHandler}
+          sendData={this.state.item}
+        />
         <Row xs={1} md={3} className="g-4">
           {this.state.booksArr.map((item) => {
             return (
@@ -182,12 +141,7 @@ class BestBooks extends React.Component {
             );
           })}
         </Row>
-        <UpdatForm
-          show={this.state.showFlag}
-          handleClose={this.handleClose}
-          updateHandler={this.updateHandler}
-          sendData={this.state.item}
-        />
+        
         {/* <Carousel>
           {this.state.booksArr.map((item) => {
             return (

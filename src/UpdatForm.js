@@ -8,7 +8,7 @@ class UpdatForm extends Component {
   render() {
     return (
       <div>
-        <Modal show={this.props.show} onHide={this.props.handleClose}>
+        <Modal show={this.props.show} onHide={this.props.handleClose} style={{backgroundColor:'black'}}>
           <Modal.Header closeButton>
             <Modal.Title>Update Book</Modal.Title>
           </Modal.Header>
