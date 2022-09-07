@@ -7,10 +7,14 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import UpdatForm from "./UpdatForm";
 import AddBookForm from "./AddBookForm";
+import { withAuth0 } from '@auth0/auth0-react';
+
 const URL = process.env.REACT_APP_URL;
 
 class BestBooks extends React.Component {
+
   constructor(props) {
+
     super(props);
     this.state = {
       booksArr: [],
@@ -35,11 +39,14 @@ class BestBooks extends React.Component {
 
   addBook = (e) => {
     e.preventDefault();
+    const { user } = this.props.auth0;
     const obj = {
       title: e.target.title.value,
       description: e.target.description.value,
       status: e.target.status.value,
+      email: user.email
     };
+    // console.log(obj)
     axios
       .post(`${URL}addBook`, obj)
       .then((result) => {
@@ -62,12 +69,15 @@ class BestBooks extends React.Component {
   };
 
   updateHandler = (e) => {
+    const { user } = this.props.auth0;
     e.preventDefault();
     const obj={
       title: e.target.title.value,
       description: e.target.description.value,
-      status: e.target.status.value
+      status: e.target.status.value,
+      email: user.email
     }
+    // console.log(obj);
     let id =this.state.item._id
     // console.log(id);
     axios
@@ -101,9 +111,15 @@ class BestBooks extends React.Component {
 
 
   render() {
+    const background ={
+      backgroundImage: 'url("https://assets.teenvogue.com/photos/5e6bffbbdee1770008c6d9bd/16:9/w_2560%2Cc_limit/GettyImages-577674005.jpg")',
+      backgroundColor: '#cccccc',
+      backgroundRepeat:'no-repeat',
+      backgroundSize:'cover'
+  }
 
     return (
-      <div style={{ backgroundColor: "gray" }}>
+      <div style={background}>
         <AddBookForm addBook={this.addBook}/>
         <UpdatForm
           show={this.state.showFlag}
@@ -172,4 +188,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);
