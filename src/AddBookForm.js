@@ -6,19 +6,16 @@ class AddBookForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.props.addBook} style={{ textAlign: "center" }}>
+        <Form onSubmit={this.props.addBook} style={{ textAlign: "center", display:'flex',justifyContent:'space-between', flexDirection:'column',gap:'30px' }}>
           <Form.Group className="mb-3">
-            <Form.Label style={{ fontSize: "20px" }}>Book Title</Form.Label>
             <Form.Control
               placeholder="Book Title"
               name="title"
-              style={{ textAlign: "center", margin: "auto", width: "auto" }}
+              style={{ textAlign: "center",margin: "20px auto auto auto", width: "auto" }}
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label style={{ fontSize: "20px" }}>
-              Book Description
-            </Form.Label>
+            
             <Form.Control
               placeholder="Book Description"
               name="description"
@@ -27,7 +24,7 @@ class AddBookForm extends Component {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label style={{ fontSize: "20px" }}>Status</Form.Label>
+            
             <Form.Select
               id="status"
               style={{ textAlign: "center", margin: "auto", width: "auto" }}
@@ -39,7 +36,7 @@ class AddBookForm extends Component {
           </Form.Group>
           <Button
             type="submit"
-            style={{ fontSize: "20px", marginBottom: "30px" }}
+            style={{ fontSize: "20px", margin: "auto auto 20px auto",width:'auto',color:'black',fontWeight:'600' }}
           >
             Add new book
           </Button>
